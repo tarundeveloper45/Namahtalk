@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Blog – NamahTalks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="starCanvas"></canvas>
+
+<div class="mob-overlay" id="mobMenu">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="home.html">Home</a>
+  <a href="home.html#episodes">Episodes</a>
+  <a href="home.html#guests">Guests</a>
+  <a href="blog.html" style="color:var(--pink)">Blog</a>
+</div>
+
+<header>
+  <nav id="mainNav">
+    <a href="home.html" class="nav-logo"><div class="logo-ring"></div><span class="logo-txt">NamahTalks</span></a>
+    <ul class="nav-links">
+      <li><a href="home.html#episodes">Episodes</a></li>
+      <li><a href="home.html#guests">Guests</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-ico" onclick="window.open('https://youtube.com','_blank')"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z"/></svg></button>
+      <button class="nav-ico" onclick="window.open('https://spotify.com','_blank')"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.28c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.42.18.48.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-.99-.18-1.11-.66-.12-.48.18-.99.66-1.11 4.38-1.32 9.78-.66 13.5 1.62.36.18.54.78.15 1.23zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.42-1.02.6-1.56.3z"/></svg></button>
+      <button class="btn-guest">Be a Guest</button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- LISTING -->
+<div id="listingPage">
+  <div class="blog-page-header">
+    <a href="home.html" class="back-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Home
+    </a>
+    <h1 class="blog-page-title">The <em>Blog</em></h1>
+    <p class="blog-page-sub">Insights, guides, and stories from the NamahTalks universe — exploring ideas at the intersection of technology, culture, and human connection.</p>
+  </div>
+  <div class="blog-posts-grid" id="postsGrid"></div>
+</div>
+
+<!-- ARTICLE -->
+<div id="articlePage" style="display:none">
+  <div class="art-header-section">
+    <button class="art-back" onclick="backToList()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Blog
+    </button>
+    <span class="art-tag" id="artTag"></span>
+    <h1 class="art-title" id="artTitle"></h1>
+    <div class="art-byline" id="artByline"></div>
+  </div>
+  <div class="art-cover"><div class="art-cover-inner" id="artCover"></div></div>
+  <div class="art-content" id="artContent"></div>
+  <div class="art-share">
+    <div class="art-share-inner">
+      <span class="art-share-label">Share this article</span>
+      <a href="#" class="sh-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Twitter / X</a>
+      <a href="#" class="sh-btn">LinkedIn</a>
+      <a href="#" class="sh-btn" id="copyBtn" onclick="navigator.clipboard&&navigator.clipboard.writeText(window.location.href).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy Link',2e3)})">Copy Link</a>
+    </div>
+  </div>
+  <div class="related-section">
+    <div class="related-head">
+      <h3>More from the Journal</h3>
+      <button class="btn-border" onclick="backToList()" style="font-size:13px;padding:8px 20px">← All Posts</button>
+    </div>
+    <div class="related-grid" id="relatedGrid"></div>
+  </div>
+</div>
+
+</main>
+
+<div class="nl-band">
+  <div style="max-width:600px;margin:0 auto;padding:88px 24px;text-align:center">
+    <span class="eyebrow" style="display:block;text-align:center">Stay in the Loop</span>
+    <h2 style="font-weight:900;font-size:clamp(30px,5vw,52px);letter-spacing:-.025em;text-transform:uppercase;line-height:1;margin-bottom:14px">Never Miss a Story</h2>
+    <p style="color:var(--grey);font-size:16px;line-height:1.68;margin-bottom:34px">Our best essays delivered every week. Join 80,000+ readers who think deeply.</p>
+    <form style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center" onsubmit="handleNL(event)">
+      <input class="nl-input" type="email" placeholder="your@email.com" required/>
+      <button type="submit" class="btn-primary" style="white-space:nowrap">Subscribe →</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="home.html" class="nav-logo" style="text-decoration:none"><div class="logo-ring"></div><span class="logo-txt" style="font-size:17px">NamahTalks</span></a>
+        <p>Conversations that challenge, inspire, and move you — every single week.</p>
+        <div class="ft-soc">
+          <a href="#" class="ft-soc-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z"/></svg></a>
+          <a href="#" class="ft-soc-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Show</h5><ul><li><a href="home.html#episodes">All Episodes</a></li><li><a href="home.html#guests">Meet Guests</a></li><li><a href="#">Be a Guest</a></li></ul></div>
+      <div class="ft-col"><h5>Content</h5><ul><li><a href="blog.html">Blog</a></li><li><a href="#">Newsletter</a></li><li><a href="#">Transcripts</a></li></ul></div>
+      <div class="ft-col"><h5>Listen</h5><ul><li><a href="#">Spotify</a></li><li><a href="#">Apple Podcasts</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="ft-bot"><p>© 2026 NamahTalks. All rights reserved.</p><div style="display:flex;gap:18px"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+
+<script>
+const POSTS=[
+  {slug:'ai-podcasts',bg:'linear-gradient(135deg,#0a0818,#1a1540)',tag:'Technology',tc:'rgba(34,29,254,0.15)',tt:'#8a87ff',icon:'cpu',title:'Why AI Podcasts Are the Future of Learning',excerpt:'Explore how AI-generated insights and conversational formats are reshaping the way we consume knowledge and stay informed.',author:'Namah Verma',authorInit:'NV',authorColor:'linear-gradient(135deg,#221DFE,#6b2dfe)',date:'Mar 25, 2026',read:'5 min',body:'<h2>A New Kind of Knowledge Delivery</h2><p>Podcasts have always been a democratic medium — low barrier to entry, high intimacy, available anywhere. But the rise of AI is adding a new dimension: the ability to synthesise vast quantities of information into coherent, conversational narratives at scale.</p><p>The best AI-assisted podcast productions are already outpacing traditional media on speed without sacrificing depth. A topic that might take a journalist a week to research can now be covered with AI support in hours — and often with more comprehensive sourcing.</p><blockquote>"The question is no longer whether AI will reshape audio media — it\'s whether creators will lead that reshaping or be reshaped by it."</blockquote><h2>What This Means for Listeners</h2><p>For the curious listener, this creates an unprecedented abundance of quality content. The challenge shifts from finding good information to curating what you consume. Algorithmic recommendation systems are still catching up to this new landscape.</p><ul><li>AI can synthesise multiple expert perspectives simultaneously</li><li>Conversational formats make complex ideas more accessible</li><li>Personalisation means content adapts to your existing knowledge level</li></ul>'},
+  {slug:'art-of-conversations',bg:'linear-gradient(135deg,#081418,#0f2a20)',tag:'Culture',tc:'rgba(16,185,129,0.15)',tt:'#10b981',icon:'chat',title:'The Art of Conversations That Matter',excerpt:'Great conversations aren\'t accidents — they\'re crafted. A look at what makes podcast dialogues truly impactful and memorable.',author:'Riya Sharma',authorInit:'RS',authorColor:'linear-gradient(135deg,#F84DA0,#c42077)',date:'Mar 20, 2026',read:'4 min',body:'<h2>The Architecture of a Great Conversation</h2><p>Every memorable conversation has a shape. It rises and falls. It has moments of unexpected revelation and moments of quiet intimacy. It surprises both participants. And it leaves something behind — a changed perspective, a new question, a connection that didn\'t exist before.</p><p>Most conversations, especially in professional contexts, lack this architecture. They\'re transactional. Information moves in one direction. The goal is closure, not opening.</p><blockquote>"The best interviewers are genuinely more interested in what they don\'t know than in what they do."</blockquote><h2>What Makes the Difference</h2><p>The single biggest predictor of whether a conversation will be memorable is the host\'s willingness to follow curiosity rather than agenda. Prepared questions are scaffolding, not a script. The best moments come from abandoning the plan when something more interesting presents itself.</p><ul><li>Listen to understand, not to respond</li><li>Follow energy, not the question list</li><li>Embrace silence — it creates space for depth</li><li>Ask the follow-up your audience is thinking</li></ul>'},
+  {slug:'listener-to-creator',bg:'linear-gradient(135deg,#180d08,#2a1a08)',tag:'Growth',tc:'rgba(245,158,11,0.15)',tt:'#f59e0b',icon:'rocket',title:'From Listener to Creator: Starting Your Own Show',excerpt:'A practical guide to launching your first podcast — from concept and equipment to finding your voice and building an audience.',author:'Arjun Tiwari',authorInit:'AT',authorColor:'linear-gradient(135deg,#0ea5e9,#0284c7)',date:'Mar 15, 2026',read:'7 min',body:'<h2>Why Now Is the Best Time to Start</h2><p>The barriers to podcasting have never been lower. A decent USB microphone, free recording software, and a hosting platform that costs less than a Netflix subscription are all you need to be heard by anyone, anywhere in the world.</p><p>The harder challenge is clarity of purpose. Why does your show exist? What does it offer that nothing else does?</p><h2>The Practical Checklist</h2><ul><li><strong>Concept:</strong> Define your show in one sentence.</li><li><strong>Format:</strong> Solo, interview, co-hosted, or narrative?</li><li><strong>Equipment:</strong> Start with a dynamic USB mic.</li><li><strong>Hosting:</strong> Anchor, Buzzsprout, or Transistor for beginners.</li><li><strong>Consistency:</strong> One episode a week, every week.</li></ul><blockquote>"Your first ten episodes are practice. Publish them anyway."</blockquote>'},
+  {slug:'voice-first-interfaces',bg:'linear-gradient(135deg,#081418,#0a2030)',tag:'Technology',tc:'rgba(34,29,254,0.15)',tt:'#8a87ff',icon:'globe',title:'The Rise of Voice-First Interfaces',excerpt:'Voice assistants and audio-first content are changing how we interact with technology. Here\'s what it means for creators.',author:'Namah Verma',authorInit:'NV',authorColor:'linear-gradient(135deg,#221DFE,#6b2dfe)',date:'Mar 10, 2026',read:'6 min',body:'<h2>Beyond the Screen</h2><p>For most of computing history, interaction meant looking. Eyes to screen, fingers to keyboard. But that contract is being renegotiated. Voice-first interfaces represent something genuinely different — not just a new input method, but a fundamentally different relationship with technology.</p><blockquote>"The most natural interface is the one that requires the least interface at all."</blockquote><h2>What This Means for Audio Creators</h2><p>As smart speakers, earbuds, and in-car systems become the dominant mode of content consumption, the audio creator has a structural advantage. Your content is already formatted for the dominant interface of the next decade.</p><ul><li>Optimize for listening at 1.5x speed</li><li>Structure episodes with clear verbal signposts</li><li>Consider how your show sounds in different environments</li></ul>'},
+  {slug:'100-episodes',bg:'linear-gradient(135deg,#1a0820,#2a0a30)',tag:'Inspiration',tc:'rgba(168,85,247,0.15)',tt:'#a855f7',icon:'heart',title:'Lessons from 100 Podcast Episodes',excerpt:'After hosting over 100 episodes, here are the biggest takeaways about storytelling, vulnerability, and connection.',author:'Riya Sharma',authorInit:'RS',authorColor:'linear-gradient(135deg,#F84DA0,#c42077)',date:'Mar 5, 2026',read:'8 min',body:'<h2>What 100 Conversations Teach You</h2><p>There\'s a version of this essay that lists tactical advice. What\'s actually worth sharing after 100 conversations is stranger and harder to implement. The most consistently surprising thing: the episodes I was least prepared for were often the best ones.</p><blockquote>"Vulnerability is the prerequisite for connection. This is as true in podcast interviews as it is in life."</blockquote><h2>The Lessons That Stuck</h2><ul><li>People are more interesting than their credentials suggest</li><li>The best question is often the simplest — "why?"</li><li>Silence is a tool, not a failure</li><li>Your audience can hear when you care and when you don\'t</li></ul>'},
+  {slug:'think-like-polymath',bg:'linear-gradient(135deg,#0a1008,#182010)',tag:'Ideas',tc:'rgba(16,185,129,0.15)',tt:'#10b981',icon:'bulb',title:'How to Think Like a Polymath',excerpt:'The world rewards specialists, but polymaths see connections others miss. Practical ways to cultivate cross-disciplinary thinking.',author:'Arjun Tiwari',authorInit:'AT',authorColor:'linear-gradient(135deg,#0ea5e9,#0284c7)',date:'Feb 28, 2026',read:'6 min',body:'<h2>The Specialization Trap</h2><p>Modern education and professional life push relentlessly toward specialization. The incentives are real: deep expertise commands premium prices and clear career paths. But specialization has a shadow side — the narrowing of the questions you\'re even capable of asking.</p><blockquote>"The adjacent possible is larger for people who stand at the intersection of multiple fields."</blockquote><h2>Practical Cultivation</h2><ul><li><strong>Read outside your field daily.</strong> Even 15 minutes changes how you think.</li><li><strong>Build T-shaped knowledge.</strong> Go deep in one area, maintain literacy in five others.</li><li><strong>Teach what you learn.</strong> Explaining an idea reveals every gap in your understanding.</li><li><strong>Ask translation questions.</strong> "How would a biologist see this problem?"</li></ul>'},
+];
+
+const ICONS={cpu:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M16 2v3M8 2v3M16 19v3M8 19v3M2 16h3M2 8h3M19 16h3M19 8h3"/></svg>`,chat:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,rocket:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>`,globe:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,heart:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,bulb:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>`};
+
+const CLOCK_SVG=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+const ARR_SVG=`<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
+
+function card(p,i){return`<div class="bcn-card" onclick="openPost(${i})" style="cursor:pointer"><div class="bcn-visual" style="background:${p.bg}"><span class="bcn-chip">${p.tag.toUpperCase()}</span><div class="bcn-icon-box">${ICONS[p.icon]||ICONS.chat}</div></div><div class="bcn-body"><div style="font-size:11.5px;color:var(--grey);margin-bottom:10px">${p.date}</div><h3>${p.title}</h3><p>${p.excerpt}</p></div><div class="bcn-foot"><span class="bcn-time">${CLOCK_SVG}${p.read} read</span><span class="bcn-more">Read more ${ARR_SVG}</span></div></div>`;}
+
+function renderGrid(){document.getElementById('postsGrid').innerHTML=POSTS.map((p,i)=>card(p,i)).join('');}
+
+function openPost(idx){const p=POSTS[idx];history.pushState({post:p.slug},'',`blog.html?post=${p.slug}`);showArticle(p,idx);}
+
+function showArticle(p,idx){
+  const t=document.getElementById('artTag');t.textContent=p.tag;t.style.background=p.tc;t.style.color=p.tt;
+  document.getElementById('artTitle').textContent=p.title;
+  document.getElementById('artByline').innerHTML=`<div class="art-av" style="background:${p.authorColor}">${p.authorInit}</div><div><div class="art-byline-name">${p.author}</div><div class="art-byline-meta">${p.date} · ${p.read} read</div></div>`;
+  const c=document.getElementById('artCover');c.style.background=p.bg;c.innerHTML=`<div style="position:relative;z-index:2;transform:scale(2.5)">${ICONS[p.icon]||''}</div>`;
+  document.getElementById('artContent').innerHTML=p.body;
+  const rel=POSTS.filter((_,i)=>i!==idx).slice(0,3);
+  document.getElementById('relatedGrid').innerHTML=rel.map(r=>card(r,POSTS.indexOf(r))).join('');
+  document.getElementById('listingPage').style.display='none';
+  document.getElementById('articlePage').style.display='block';
+  document.title=`${p.title} — NamahTalks`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function backToList(){
+  document.getElementById('listingPage').style.display='block';
+  document.getElementById('articlePage').style.display='none';
+  history.pushState({},'','blog.html');
+  document.title='The Blog — NamahTalks';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+window.addEventListener('popstate',e=>{if(e.state&&e.state.post){const idx=POSTS.findIndex(p=>p.slug===e.state.post);if(idx>-1)showArticle(POSTS[idx],idx);}else backToList();});
+
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('mobMenu').classList.add('open');document.body.style.overflow='hidden';});
+document.getElementById('mobClose').addEventListener('click',()=>{document.getElementById('mobMenu').classList.remove('open');document.body.style.overflow='';});
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60),{passive:true});
+
+function handleNL(e){e.preventDefault();const btn=e.target.querySelector('button[type=submit]');btn.textContent="✓ You're in!";btn.style.cssText='background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 0 24px rgba(16,185,129,.4)';setTimeout(()=>{btn.textContent='Subscribe →';btn.style.cssText=''},3500);}
+
+const cvs=document.getElementById('starCanvas'),cx=cvs.getContext('2d');let stars=[];
+function rsz(){cvs.width=window.innerWidth;cvs.height=window.innerHeight}
+function mkStars(n){stars=Array.from({length:n},()=>({x:Math.random()*cvs.width,y:Math.random()*cvs.height,r:Math.random()*1.3+0.15,spd:Math.random()*.009+.002,ph:Math.random()*Math.PI*2,col:Math.random()<.1?(Math.random()<.5?'#221DFE':'#F84DA0'):'#fff'}))}
+function drawStars(ts){cx.clearRect(0,0,cvs.width,cvs.height);for(const s of stars){const a=.2+.65*(.5+.5*Math.sin(ts*s.spd+s.ph));cx.beginPath();cx.arc(s.x,s.y,s.r,0,Math.PI*2);cx.fillStyle=s.col;cx.globalAlpha=a;cx.fill();}cx.globalAlpha=1;requestAnimationFrame(drawStars);}
+rsz();mkStars(220);requestAnimationFrame(drawStars);
+window.addEventListener('resize',()=>{rsz();mkStars(220);},{passive:true});
+
+renderGrid();
+const slug=new URLSearchParams(window.location.search).get('post');
+if(slug){const idx=POSTS.findIndex(p=>p.slug===slug);if(idx>-1)showArticle(POSTS[idx],idx);}
+</script>
+</body>
+</html>
